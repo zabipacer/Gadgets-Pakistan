@@ -2,10 +2,10 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram
 
 export default function ContactUs() {
   return (
-    <section className="bg-[#0A1F3F] text-white py-12 px-6">
+    <section className="bg-[#0A1F3F]  text-white py-12 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Contact Form */}
-        <div className="bg-[#1b2a50] p-8 rounded-lg shadow-lg">
+        <div className="bg-[#1b2a50] p-8 border border-white/20 rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
           <form className="space-y-4">
             <div>

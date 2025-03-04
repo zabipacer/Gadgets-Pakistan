@@ -1,10 +1,19 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, ShoppingCart } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [active, setActive] = useState("Home");
+  const location = useLocation();
+  
+  // Define your menu links with their routes.
+  const links = [
+    { name: "Home", to: "/" },
+    { name: "Shop", to: "/shop" },
+    { name: "About", to: "/about" },
+    { name: "Contact", to: "/contact" },
+  ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -12,25 +21,23 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 w-full bg-[#0A1F3F]/80 backdrop-blur-lg border-b border-[#00C7FF] z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <div className="text-[#FAFAFA] text-2xl font-bold cursor-pointer">Gadgets pakistan</div>
+        <Link to="/" className="text-[#FAFAFA] text-2xl font-bold cursor-pointer">
+          Gadgets Pakistan
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-8 text-[#FAFAFA] font-medium">
-          {["Home", "Shop", "About", "Contact"].map((item) => (
-            <li
-              key={item}
-              className="relative group cursor-pointer"
-              onClick={() => setActive(item)}
-            >
-              <span
-                className={`${
-                  active === item ? "text-[#00C7FF]" : "hover:text-[#00C7FF]"
-                } transition`}
+          {links.map((link) => (
+            <li key={link.name} className="relative group cursor-pointer">
+              <Link
+                to={link.to}
+                className={`transition ${
+                  location.pathname === link.to ? "text-[#00C7FF]" : "hover:text-[#00C7FF]"
+                }`}
               >
-                {item}
-              </span>
-              {/* Glowing dot for active state */}
-              {active === item && (
+                {link.name}
+              </Link>
+              {location.pathname === link.to && (
                 <motion.div
                   layoutId="active-dot"
                   className="absolute left-1/2 transform -translate-x-1/2 bottom-[-6px] w-2 h-2 bg-[#00C7FF] rounded-full"
@@ -42,15 +49,15 @@ const Navbar = () => {
 
         {/* Right side (CTA + Cart) */}
         <div className="hidden md:flex items-center space-x-6">
-          <motion.button
+          <Link
+            to="/shop"
             className="bg-[#00C7FF] text-[#0A1F3F] px-5 py-2 rounded-full font-semibold shadow-lg transition hover:shadow-[#00C7FF]/50"
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
           >
             Shop Now
-          </motion.button>
-          <ShoppingCart className="text-[#FAFAFA] w-6 h-6 cursor-pointer hover:text-[#00C7FF]" />
+          </Link>
+          <Link to="/cart">
+            <ShoppingCart className="text-[#FAFAFA] w-6 h-6 cursor-pointer hover:text-[#00C7FF]" />
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -67,33 +74,35 @@ const Navbar = () => {
           animate={{ opacity: 1, x: "0%" }}
           exit={{ opacity: 0, x: "100%" }}
         >
-          {["Home", "Shop", "About", "Contact"].map((item) => (
-            <div
-              key={item}
+          {links.map((link) => (
+            <Link
+              key={link.name}
+              to={link.to}
               className="relative cursor-pointer text-2xl"
-              onClick={() => {
-                setActive(item);
-                toggleMenu();
-              }}
+              onClick={toggleMenu}
             >
-              <span className={`${
-                active === item ? "text-[#00C7FF]" : "hover:text-[#00C7FF]"
-              } transition`}>
-                {item}
+              <span
+                className={`transition ${
+                  location.pathname === link.to ? "text-[#00C7FF]" : "hover:text-[#00C7FF]"
+                }`}
+              >
+                {link.name}
               </span>
-              {active === item && (
+              {location.pathname === link.to && (
                 <motion.div
                   layoutId="active-dot"
                   className="absolute left-1/2 transform -translate-x-1/2 bottom-[-6px] w-2 h-2 bg-[#00C7FF] rounded-full"
                 />
               )}
-            </div>
+            </Link>
           ))}
-          <button
+          <Link
+            to="/shop"
             className="bg-[#00C7FF] text-[#0A1F3F] px-6 py-3 rounded-full font-semibold shadow-lg transition hover:shadow-[#00C7FF]/50"
+            onClick={toggleMenu}
           >
             Shop Now
-          </button>
+          </Link>
         </motion.div>
       )}
     </nav>
