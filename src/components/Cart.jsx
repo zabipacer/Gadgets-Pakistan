@@ -106,11 +106,11 @@ export default function Cart() {
         <div className="mt-8 text-right">
           <h2 className="text-2xl font-bold">Total: Rs. {total}</h2>
           <Link
-            to="/checkout"
-            className="mt-4 inline-block bg-[#00C7FF] text-[#0A1F3F] px-6 py-3 rounded-full font-semibold shadow hover:shadow-xl transition duration-300"
-          >
-            Proceed to Checkout
-          </Link>
+  to="http://gadgetswoocommerce.local/checkout"
+  className="mt-4 inline-block bg-[#00C7FF] text-[#0A1F3F] px-6 py-3 rounded-full font-semibold shadow hover:shadow-xl transition duration-300"
+>
+  Proceed to Checkout
+</Link>
           <button
             onClick={() => dispatch(clearCart())}
             className="mt-4 ml-4 inline-block bg-red-500 text-white px-6 py-3 rounded-full font-semibold shadow hover:shadow-xl transition duration-300"

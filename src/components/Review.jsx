@@ -5,27 +5,33 @@ export default function UserReviews() {
   const reviews = [
     {
       id: 1,
-      name: "John Doe",
+      name: "Ali Raza Khan",
       rating: 5,
-      review: "Absolutely love the Vortex X9 Keyboard! The RGB lights and tactile feel are unmatched. Highly recommend for gamers!",
-      image: "/path-to-user-image-1.jpg",
+      review: "The Vortex X9 Keyboard survived Karachi's humidity perfectly! Perfect for late-night coding sessions during load shedding.",
+      image: "https://picsum.photos/seed/ali/200/200",
     },
     {
       id: 2,
-      name: "Jane Smith",
+      name: "Fatima Ahmed",
       rating: 4,
-      review: "The Phantom Wireless Mouse is super responsive and lightweight. Great for long gaming sessions. Would have liked a bit more battery life.",
-      image: "/path-to-user-image-2.jpg",
+      review: "Phantom Mouse works flawlessly with Lahore's power fluctuations. Lasted through my entire CSGO tournament at Peshawar Road Cafe!",
+      image: "https://picsum.photos/seed/fatima/200/200",
     },
     {
       id: 3,
-      name: "Chris Williams",
+      name: "Hassan Shah",
       rating: 5,
-      review: "Eclipse 4K Monitor is a game-changer. The color accuracy is perfect for design work and gaming. Worth every penny.",
-      image: "/path-to-user-image-3.jpg",
+      review: "Eclipse Monitor's colors are as vibrant as Truck Art! Perfect for both my graphic design work and watching PSL matches in Islamabad.",
+      image: "https://picsum.photos/seed/hassan/200/200",
     },
-    // Add more reviews as needed
+    // More Pakistani reviews
   ];
+
+  // Animation names inspired by Pakistani landmarks
+  const animations = {
+    backgroundPulse: "animate-himalayan-glow",
+    avatarPing: "animate-indus-ping"
+  };
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -40,33 +46,27 @@ export default function UserReviews() {
     ));
   };
 
-  const nextReview = () => {
-    setCurrentIndex((prev) => (prev + 1) % reviews.length);
-  };
-
-  const prevReview = () => {
-    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
-  };
+  // Navigation functions remain same
+  const nextReview = () => setCurrentIndex((prev) => (prev + 1) % reviews.length);
+  const prevReview = () => setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextReview();
-    }, 5000); // Auto-rotate every 5 seconds
+    const interval = setInterval(nextReview, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="bg-gradient-to-r from-[#0A1F3F] to-[#00152E] text-white py-16 px-6 relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#00C7FF10] to-[#00C7FF05] animate-pulse"></div>
+      {/* Himalayan Glow Animation */}
+      <div className={`absolute inset-0 bg-gradient-to-r from-[#00C7FF10] to-[#00C7FF05] ${animations.backgroundPulse}`}></div>
 
       <h2 className="text-4xl font-bold text-center mb-12 relative z-10">
-        What Our Customers Are Saying
+        What Pakistan's Gamers Say
       </h2>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Review Card */}
-        <div className="bg-[#1b2a50] p-8 rounded-lg shadow-2xl transform transition-transform duration-500 hover:scale-105">
+        {/* Review Card with Chitrali Woodcarving-inspired border */}
+        <div className="bg-[#1b2a50] p-8 rounded-lg shadow-2xl transform transition-transform duration-500 hover:scale-105 border-l-4 border-[#00C7FF]">
           <div className="flex items-center mb-6">
             <div className="relative w-16 h-16">
               <img
@@ -74,7 +74,8 @@ export default function UserReviews() {
                 alt={reviews[currentIndex].name}
                 className="w-full h-full rounded-full object-cover"
               />
-              <div className="absolute inset-0 border-2 border-[#00C7FF] rounded-full animate-ping-slow"></div>
+              {/* Indus River Ping Effect */}
+              <div className={`absolute inset-0 border-2 border-[#00C7FF] rounded-full ${animations.avatarPing}`}></div>
             </div>
             <div className="ml-4">
               <h3 className="font-semibold text-xl">{reviews[currentIndex].name}</h3>
@@ -84,38 +85,40 @@ export default function UserReviews() {
           <p className="text-gray-300 italic">"{reviews[currentIndex].review}"</p>
         </div>
 
-        {/* Carousel Controls */}
+        {/* Carousel Controls with Badshahi Mosque-inspired design */}
         <div className="flex justify-center mt-8 space-x-4">
           <button
             onClick={prevReview}
-            className="p-2 bg-[#00C7FF] rounded-full hover:bg-[#00A6FF] transition-all"
+            className="p-2 bg-[#00C7FF] rounded-full hover:bg-[#00A6FF] transition-all shadow-md shadow-[#005C99]"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+            {/* Previous Icon */}
           </button>
           <button
             onClick={nextReview}
-            className="p-2 bg-[#00C7FF] rounded-full hover:bg-[#00A6FF] transition-all"
+            className="p-2 bg-[#00C7FF] rounded-full hover:bg-[#00A6FF] transition-all shadow-md shadow-[#005C99]"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            {/* Next Icon */}
           </button>
         </div>
       </div>
+
+      <style jsx global>{`
+        /* Custom Pakistani-themed animations */
+        @keyframes himalayan-glow {
+          0%, 100% { opacity: 0.1; }
+          50% { opacity: 0.3; }
+        }
+        .animate-himalayan-glow {
+          animation: himalayan-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes indus-ping {
+          75%, 100% { transform: scale(1.1); opacity: 0; }
+        }
+        .animate-indus-ping {
+          animation: indus-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+      `}</style>
     </section>
   );
 }

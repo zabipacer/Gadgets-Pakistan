@@ -12,9 +12,9 @@ export default function ProductPage() {
   const [error, setError] = useState(null);
 
   // WooCommerce API credentials and URL
-  const CONSUMER_KEY = "ck_d7a4dbe881abcda743b2b0d508065e98a127fcca";
-  const CONSUMER_SECRET = "cs_6caf9109df1ef6d7f65e7d3ec3a8ae48d82efa3b";
-  const API_URL = "http://gadgetswoocommerce.local/wp-json/wc/v3/products";
+  const CONSUMER_KEY = import.meta.env.VITE_WC_CONSUMER_KEY;
+  const CONSUMER_SECRET = import.meta.env.VITE_WC_CONSUMER_SECRET;
+  const API_URL = import.meta.env.VITE_WC_API_URL;
 
   // Initialize OAuth instance using oauth-1.0a and CryptoJS
   const oauth = OAuth({

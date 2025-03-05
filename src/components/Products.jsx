@@ -4,15 +4,18 @@ import OAuth from "oauth-1.0a";
 import CryptoJS from "crypto-js";
 import { useNavigate } from "react-router-dom";
 import { addToWooCart } from "../utils/woocommetce";
+import { motion } from "framer-motion";
+
+
 
 export default function FeaturedProducts() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
   // WooCommerce credentials and API URL
-  const CONSUMER_KEY = "ck_d7a4dbe881abcda743b2b0d508065e98a127fcca";
-  const CONSUMER_SECRET = "cs_6caf9109df1ef6d7f65e7d3ec3a8ae48d82efa3b";
-  const API_URL = "http://gadgetswoocommerce.local/wp-json/wc/v3/products";
+  const CONSUMER_KEY = import.meta.env.VITE_WC_CONSUMER_KEY;
+const CONSUMER_SECRET = import.meta.env.VITE_WC_CONSUMER_SECRET;
+const API_URL = import.meta.env.VITE_WC_API_URL;
 
   // Initialize OAuth using oauth-1.0a and CryptoJS for signing
   const oauth = OAuth({
@@ -75,7 +78,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-16 border border-white px-6 bg-gradient-to-br from-[#0a0f24] to-[#1b2a50] w-full">
+    <section className="py-16 border border-white px-6  bg-gradient-to-br from-[#0a0f24] to-[#1b2a50] w-full">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold text-center text-white mb-12">
           <span className="bg-gradient-to-r from-[#00C7FF] to-[#00FFC2] text-transparent bg-clip-text">
@@ -117,14 +120,20 @@ export default function FeaturedProducts() {
                 </div>
                 <button
                   onClick={(e) => handleAddToCart(product.id, e)}
-                  className="w-full mt-4 bg-gradient-to-r from-[#00C7FF] to-[#00B4FF] text-white py-3 rounded-xl flex items-center justify-center gap-2 hover:shadow-lg border-2 border-white/20"
+                  className="w-full cursor-pointer mt-4 bg-gradient-to-r from-[#00C7FF] to-[#00B4FF] text-white py-3 rounded-xl flex items-center justify-center gap-2 hover:shadow-lg border-2 border-white/20"
                 >
                   Add to Cart
                 </button>
               </div>
             ))
           ) : (
-            <p className="text-white text-center">No products found.</p>
+            <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#0a0f24] to-[#1b2a50]">
+            <motion.div
+              className="w-16 h-16 border-4 border-t-transparent border-[#00C7FF] rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+            />
+          </div>
           )}
         </div>
       </div>
